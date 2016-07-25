@@ -6,10 +6,10 @@ object MorseAlphabet {
     override def toString = representation
   }
 
-  case object Dot extends MorseSymbol("•")
+  case object Dot extends MorseSymbol(".")
 
   case object Dash extends MorseSymbol("-")
 
-  case object Space extends MorseSymbol(" ")
+  case object Space extends MorseSymbol("/")
 
 }
