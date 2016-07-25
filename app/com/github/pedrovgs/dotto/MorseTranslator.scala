@@ -8,7 +8,7 @@ import com.github.pedrovgs.dotto.MorseAlphabet.{Space, Dash, Dot, MorseSymbol}
   */
 object MorseTranslator {
 
-  private val charToMorseSymbol = Map('a' -> List(Dot, Dash),
+  private val charToMorseSymbol: Map[Char, Seq[MorseSymbol]] = Map('a' -> List(Dot, Dash),
     'b' -> List(Dash, Dot, Dot, Dot),
     'c' -> List(Dash, Dot, Dash, Dot),
     'd' -> List(Dash, Dot, Dot),
@@ -46,7 +46,7 @@ object MorseTranslator {
     '8' -> List(Dash, Dash, Dash, Dot, Dot),
     '9' -> List(Dash, Dash, Dash, Dash, Dot))
 
-  private lazy val morseSymbolToChar = {
+  private lazy val morseSymbolToChar: Map[Seq[MorseSymbol], Char] = {
     charToMorseSymbol.map(_.swap)
   }
 
@@ -54,6 +54,12 @@ object MorseTranslator {
     text.trim.map(letter =>
       charToMorseSymbol(letter.toLower)
     )
+  }
+
+  def fromMorse(morse: Seq[Seq[MorseSymbol]]): String = {
+    morse.map(symbol =>
+      morseSymbolToChar(symbol)
+    ).mkString
   }
 
 }
