@@ -8,7 +8,6 @@ class MorseTranslatorSpec extends FlatSpec with Resources {
   "toMorse" should "return an empty list if the input is an empty String" in {
     val emptyTranslation = MorseTranslator.toMorse("")
 
-
     assert(emptyTranslation.isEmpty)
   }
 
