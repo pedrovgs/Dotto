@@ -1,4 +1,4 @@
-package dotto
+package com.github.pedrovgs.dotto
 
 /**
   * Translates a String passed as parameter into the morse representation. The rules followed to implement this
