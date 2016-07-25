@@ -11,4 +11,11 @@ class MorseTranslatorSpec extends FlatSpec with Matchers {
     assert(translatedA == Seq(Dot, Dash))
   }
 
+  "toMorse" should "be case insensitive" in {
+    val uppercaseTranslation = MorseTranslator.toMorse("A")
+    val lowercaseTranslation = MorseTranslator.toMorse("a")
+
+    assert(uppercaseTranslation == lowercaseTranslation)
+  }
+
 }
