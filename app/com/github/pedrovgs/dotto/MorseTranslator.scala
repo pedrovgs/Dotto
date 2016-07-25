@@ -1,6 +1,6 @@
 package com.github.pedrovgs.dotto
 
-import com.github.pedrovgs.dotto.MorseAlphabet.{Space, Dash, Dot, MorseSymbol}
+import com.github.pedrovgs.dotto.MorseAlphabet.{Dash, Dot, MorseSymbol, Space}
 
 /**
   * Translates a String passed as parameter into the morse representation. The rules followed to implement this
@@ -51,14 +51,14 @@ object MorseTranslator {
   }
 
   def toMorse(text: String): Seq[Seq[MorseSymbol]] = {
-    text.trim.map(letter =>
-      charToMorseSymbol(letter.toLower)
+    text.trim.flatMap(letter =>
+      charToMorseSymbol.get(letter.toLower)
     )
   }
 
   def fromMorse(morse: Seq[Seq[MorseSymbol]]): String = {
-    morse.map(symbol =>
-      morseSymbolToChar(symbol)
+    morse.flatMap(symbol =>
+      morseSymbolToChar.get(symbol)
     ).mkString
   }
 
