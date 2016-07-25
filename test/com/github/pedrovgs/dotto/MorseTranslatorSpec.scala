@@ -31,15 +31,13 @@ class MorseTranslatorSpec extends FlatSpec with Resources {
   }
 
   it should "translate string sentences with spaces" in {
-    val translation = MorseTranslator.toMorse("We love")
-    val translatedString = translation.map(_.mkString).reduce(_ + " " + _)
+    val translatedString = toMorseString("We love")
 
     assert(translatedString == ".-- . / .-.. --- ...- .")
   }
 
   it should "trims not needed spaces in the input string" in {
-    val translation = MorseTranslator.toMorse("  We love ")
-    val translatedString = translation.map(_.mkString).reduce(_ + " " + _)
+    val translatedString = toMorseString("  We love ")
 
     assert(translatedString == ".-- . / .-.. --- ...- .")
   }
@@ -67,6 +65,46 @@ class MorseTranslatorSpec extends FlatSpec with Resources {
     val translatedText = MorseTranslator.toMorse(".%$&/")
 
     assert(translatedText.isEmpty)
+  }
+
+  it should "return an empty string if the input does not contains a valid sequence of morse symbols" in {
+    val invalidMorseSentence = Seq(Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot), Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot))
+
+    val translatedString = MorseTranslator.fromMorse(invalidMorseSentence)
+
+    assert(translatedString.isEmpty)
+  }
+
+  it should "replace invalid letters translating from morse to string with spaces and trim the result" in {
+    val invalidMorseSentence = Seq(
+      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
+      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
+      Seq(Dot, Dash, Dash, Dot),
+      Seq(Dot, Dot, Dot, Dash),
+      Seq(Space),
+      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
+      Seq(Dash, Dash, Dot),
+      Seq(Dot, Dot, Dot),
+      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
+      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot))
+
+    val translatedString = MorseTranslator.fromMorse(invalidMorseSentence)
+
+    assert(translatedString == "pv gs")
+  }
+
+  it should "translate from string to morse properly" in {
+    val originalText = readLowerCaseTextResource("/anyText.txt")
+
+    val translatedString = toMorseString(originalText)
+
+    val expectedMorseInString = readLowerCaseTextResource("/anyTextInMorse.txt")
+
+    assert(translatedString == expectedMorseInString)
+  }
+
+  private def toMorseString(text: String): String = {
+    MorseTranslator.toMorse(text).map(_.mkString).reduce(_ + " " + _)
   }
 
 }
