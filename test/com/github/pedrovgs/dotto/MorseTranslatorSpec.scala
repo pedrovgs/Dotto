@@ -3,7 +3,7 @@ package com.github.pedrovgs.dotto
 import com.github.pedrovgs.dotto.MorseAlphabet._
 import org.scalatest.FlatSpec
 
-class MorseTranslatorSpec extends FlatSpec {
+class MorseTranslatorSpec extends FlatSpec with Resources {
 
   "toMorse" should "return an empty list if the input is an empty String" in {
     val emptyTranslation = MorseTranslator.toMorse("")
@@ -12,7 +12,7 @@ class MorseTranslatorSpec extends FlatSpec {
     assert(emptyTranslation.isEmpty)
   }
 
-  "toMorse" should "translate A into •-" in {
+  "toMorse" should "translate A into .-" in {
     val translatedA = MorseTranslator.toMorse("A")
 
     assert(translatedA == Seq(Seq(Dot, Dash)))
@@ -46,9 +46,7 @@ class MorseTranslatorSpec extends FlatSpec {
   }
 
   "toMorse" should "translate long texts" in {
-    //TODO: Move to a Trait.
-    val textStream = getClass.getResourceAsStream("/anyText.txt")
-    val originalText = scala.io.Source.fromInputStream(textStream).getLines().mkString.toLowerCase
+    val originalText = readLowerCaseTextResource("/anyText.txt")
 
     val translatedText = MorseTranslator.toMorse(originalText)
     val text = MorseTranslator.fromMorse(translatedText)
