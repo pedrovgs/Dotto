@@ -3,8 +3,8 @@ package com.github.pedrovgs.dotto
 import com.github.pedrovgs.dotto.MorseAlphabet.{Dash, Dot, MorseSymbol, Space}
 
 /**
-  * Translates a String passed as parameter into the morse representation. The rules followed to implement this
-  * translator can be found here: https://en.wikipedia.org/wiki/Morse_code
+  * Translates a String passed as parameter into the morse representation and vice versa. The rules followed to
+  * implement this translator can be found here: https://en.wikipedia.org/wiki/Morse_code.
   */
 object MorseTranslator {
 
