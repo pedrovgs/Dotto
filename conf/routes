@@ -1,2 +1,3 @@
 GET     /                           controllers.DottoController.index
 POST    /toMorse                    controllers.DottoController.toMorse
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

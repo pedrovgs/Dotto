@@ -5,20 +5,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Form example</title>
+    <title>Dotto</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href=@routes.Assets.at("stylesheets/materialize.min.css")
+          media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
+<div class="container">
+    <h1 class="header center blue-text">Welcome to Dotto!</h1>
 
-<h1>"Welcome to Dotto!"</h1>
+    <h5 class="center-align blue-text">Translate your messages into Morse Code</h5>
 
-@form(action = routes.DottoController.toMorse()) {
-@inputText(field = messageForm("message"), args = 'size -> 50, 'placeholder -> "Message")
-}
+    <div class="row">
+        <form class="col s12" action="@routes.DottoController.toMorse" method="post">
+            <div class="input-field">
+                <label for="message" data-error="The message can't be empty!">Message</label>
+                <input id="message" type="text" class="validate">
+                <input type="submit" class="waves-effect waves-light btn">
+            </div>
+        </form>
+    </div>
 
-@if(!messagePosted.isEmpty) {
-<h2>Your message: "@Html(messagePosted)" has been translated and added to the queue. Do you want to post another
-    message?</h2>
-}
+    @if(!messagePosted.isEmpty) {
+    <h2 class="center light-blue-text">Your message: "@Html(messagePosted)" has been translated and added to the queue.
+        Do you want to post another message?</h2>
+    }
+
+</div>
+
+<!--Import jQuery and materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src=@routes.Assets.at("javascripts/materialize.min.js")></script>
 
 </body>
 </html>
