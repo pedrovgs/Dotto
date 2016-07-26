@@ -2,6 +2,8 @@ package controllers
 
 import javax.inject._
 
+import play.api.data.Forms._
+import play.api.data._
 import play.api.mvc._
 
 /**
@@ -17,7 +19,23 @@ class DottoController @Inject() extends Controller {
     * @return the main page ready to start sending messages from a text box.
     */
   def index = Action {
-    Ok(views.html.index.render())
+    Ok(views.html.index("", ""))
+  }
+
+  /**
+    * Enqueue a message to be translated to morse and be shown in the led.
+    *
+    * @return 201 if the message has been enqueued.
+    */
+  def toMorse = Action { implicit request =>
+    Form("message" -> nonEmptyText).bindFromRequest.fold(
+      formWithErrors => {
+        BadRequest(views.html.index(errorMessage = "The request sent hasn't the correct structure."))
+      },
+      message => {
+        Created(views.html.index(message = message))
+      }
+    )
   }
 
 }

@@ -1,1 +1,2 @@
 GET     /                           controllers.DottoController.index
+POST    /toMorse                    controllers.DottoController.toMorse

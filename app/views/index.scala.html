@@ -1,1 +1,26 @@
-"Hello scala world!"
+@(message: String = "", errorMessage: String = "")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form example</title>
+</head>
+<body>
+
+<h1>"Welcome to Dotto!"</h1>
+
+<form method="post" autocomplete="on" action="toMorse">
+    Message: <input type="text" name="message"><br>
+    <input type="submit">
+</form>
+
+
+@if(!message.isEmpty) {
+<h2>Your message: "@Html(message)" has been translated and added to the queue. Do you want to post another message?</h2>
+}
+
+@if(!errorMessage.isEmpty) {
+<h1>Error: @Html(errorMessage)</h1>
+}
+</body>
+</html>
+
