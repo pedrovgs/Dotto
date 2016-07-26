@@ -1,4 +1,7 @@
-@(message: String = "", errorMessage: String = "")
+@(messageForm: Form[String], messagePosted: String = "")(implicit messages: Messages)
+
+@import helper._
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,19 +11,15 @@
 
 <h1>"Welcome to Dotto!"</h1>
 
-<form method="post" autocomplete="on" action="toMorse">
-    Message: <input type="text" name="message"><br>
-    <input type="submit">
-</form>
-
-
-@if(!message.isEmpty) {
-<h2>Your message: "@Html(message)" has been translated and added to the queue. Do you want to post another message?</h2>
+@form(action = routes.DottoController.toMorse()) {
+@inputText(field = messageForm("message"), args = 'size -> 50, 'placeholder -> "Message")
 }
 
-@if(!errorMessage.isEmpty) {
-<h1>Error: @Html(errorMessage)</h1>
+@if(!messagePosted.isEmpty) {
+<h2>Your message: "@Html(messagePosted)" has been translated and added to the queue. Do you want to post another
+    message?</h2>
 }
+
 </body>
 </html>
 
