@@ -1,6 +1,7 @@
-package com.github.pedrovgs.dotto
+package com.github.pedrovgs.dotto.morse
 
-import com.github.pedrovgs.dotto.MorseAlphabet.{Dash, Dot, MorseSymbol, Space}
+import com.github.pedrovgs.dotto.morse.MorseAlphabet.{Dash, Dot, Space, MorseSymbol}
+
 
 /**
   * Translates a String passed as parameter into the morse representation and vice versa. The rules followed to

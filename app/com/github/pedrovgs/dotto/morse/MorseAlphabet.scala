@@ -1,4 +1,4 @@
-package com.github.pedrovgs.dotto
+package com.github.pedrovgs.dotto.morse
 
 object MorseAlphabet {
 
