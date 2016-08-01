@@ -4,18 +4,17 @@ import com.github.pedrovgs.dotto.morse.MorseAlphabet.{Dash, Dot, MorseSymbol, Sp
 
 object LedController {
 
-  private val DotDuration = 0.5d
+  private val DotDuration = 0.5
   private val DashDuration = DotDuration * 3
   private val SpaceDuration = DashDuration * 3
 
-  def toLedSequence(morseSentence: Seq[MorseSymbol], led: Led): Seq[LedInteraction] = {
+  def toLedInteractions(morseSentence: Seq[MorseSymbol], led: Led): Seq[LedInteraction] = {
+    val spaceBetweenSymbols = LedInteraction(led, Low, DotDuration)
     morseSentence.map {
       case Dot => LedInteraction(led, High, DotDuration)
       case Dash => LedInteraction(led, High, DashDuration)
       case Space => LedInteraction(led, High, SpaceDuration)
-    }.map {
-      (_, LedInteraction(led, Low, DotDuration))
-    }.flatten
+    }.flatMap(Seq(_, spaceBetweenSymbols))
   }
 
 }

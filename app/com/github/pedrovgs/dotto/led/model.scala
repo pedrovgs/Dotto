@@ -15,7 +15,7 @@ sealed trait Led {
 case object Led17 extends Led {
 
   override val number = 17
-  override val name = number
+  override val name = number.toString
   override val state = Low
 
 }
