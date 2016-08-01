@@ -1,6 +1,4 @@
-@(messageForm: Form[String], messagePosted: String = "")(implicit messages: Messages)
-
-@import helper._
+@(result: String = "", error: String = "")
 
 <!DOCTYPE html>
 <html>
@@ -16,23 +14,25 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="header center blue-text">Welcome to Dotto!</h1>
+    <h1 class="header center teal-text">Welcome to Dotto!</h1>
 
-    <h5 class="center-align blue-text">Translate your messages into Morse Code</h5>
+    <h5 class="center-align teal-text">Translate your messages into Morse Code</h5>
 
     <div class="row">
         <form class="col s12" action="@routes.DottoController.toMorse" method="post">
             <div class="input-field">
-                <label for="message" data-error="The message can't be empty!">Message</label>
-                <input id="message" type="text" class="validate">
+                <input id="message" name="message" type="text" class="validate">
                 <input type="submit" class="waves-effect waves-light btn">
             </div>
         </form>
     </div>
 
-    @if(!messagePosted.isEmpty) {
-    <h2 class="center light-blue-text">Your message: "@Html(messagePosted)" has been translated and added to the queue.
-        Do you want to post another message?</h2>
+    @if(!result.isEmpty) {
+    <h2 class="center teal-text">Your message: "@Html(result)" has been translated and added to the queue.</h2>
+    }
+
+    @if(!error.isEmpty) {
+    <h2 class="center teal-text">@Html(error)</h2>
     }
 
 </div>

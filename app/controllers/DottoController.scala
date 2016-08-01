@@ -22,7 +22,7 @@ class DottoController @Inject()(val messagesApi: MessagesApi) extends Controller
     * @return the main page ready to start sending messages from a text box.
     */
   def index = Action {
-    Ok(views.html.index(messageForm))
+    Ok(views.html.index())
   }
 
   /**
@@ -33,10 +33,10 @@ class DottoController @Inject()(val messagesApi: MessagesApi) extends Controller
   def toMorse = Action { implicit request =>
     messageForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest(views.html.index(formWithErrors))
+        BadRequest(views.html.index(error = "The message can't be empty ¯\\_(ツ)_/¯"))
       },
       messagePosted => {
-        Created(views.html.index(messageForm, messagePosted))
+        Created(views.html.index(result = messagePosted))
       }
     )
   }
