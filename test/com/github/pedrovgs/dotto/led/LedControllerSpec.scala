@@ -35,7 +35,7 @@ class LedControllerSpec extends FlatSpec {
 
     assert(result(0) == LedInteraction(AnyLed, High, 0.1 seconds))
     assert(result(2) == LedInteraction(AnyLed, High, 0.3 seconds))
-    assert(result(4) == LedInteraction(AnyLed, High, 0.9 seconds))
+    assert(result(4) == LedInteraction(AnyLed, Low, 0.9 seconds))
   }
 
 }

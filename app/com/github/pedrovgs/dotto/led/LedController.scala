@@ -15,7 +15,7 @@ object LedController {
     morseSentence.flatten.map {
       case Dot => LedInteraction(led, High, DotDuration)
       case Dash => LedInteraction(led, High, DashDuration)
-      case Space => LedInteraction(led, High, SpaceDuration)
+      case Space => LedInteraction(led, Low, SpaceDuration)
     }.flatMap(Seq(_, spaceBetweenSymbols))
   }
 
