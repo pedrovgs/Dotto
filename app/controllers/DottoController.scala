@@ -5,6 +5,7 @@ import javax.inject._
 import actors.ShowMessageActor
 import actors.ShowMessageActor.ShowMessage
 import akka.actor.ActorSystem
+import play.api.Logger
 import play.api.data.Forms._
 import play.api.data._
 import play.api.i18n.{I18nSupport, MessagesApi}
@@ -25,7 +26,8 @@ class DottoController @Inject()(val messagesApi: MessagesApi, val actorSystem: A
     *
     * @return the main page ready to start sending messages from a text box.
     */
-  def index = Action {
+  def index = Action { implicit request =>
+    Logger.debug("GET request received at /" + request)
     Ok(views.html.index())
   }
 
@@ -35,12 +37,15 @@ class DottoController @Inject()(val messagesApi: MessagesApi, val actorSystem: A
     * @return 201 if the message has been enqueued.
     */
   def toMorse = Action { implicit request =>
+    Logger.debug("POST request received at / " + request)
     messageForm.bindFromRequest.fold(
       formWithErrors => {
+        Logger.debug("Error translating request " + request)
         BadRequest(views.html.index(error = "The message can't be empty ¯\\_(ツ)_/¯"))
       },
       messagePosted => {
         showMessageActor ! ShowMessage(messagePosted)
+        Logger.debug("Message enqueued to be translated " + request)
         Created(views.html.index(result = messagePosted))
       }
     )

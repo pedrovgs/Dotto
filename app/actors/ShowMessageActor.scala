@@ -1,19 +1,21 @@
 package actors
 
 import actors.ShowMessageActor.ShowMessage
-import akka.actor.{Actor, ActorLogging, Props}
+import akka.actor.{Actor, Props}
 import com.github.pedrovgs.dotto.led._
 import com.github.pedrovgs.dotto.morse.MorseTranslator
 import com.pi4j.io.gpio.{GpioFactory, PinState, RaspiPin}
+import play.api.Logger
 
-class ShowMessageActor extends Actor with ActorLogging {
+class ShowMessageActor extends Actor {
 
   override def receive: Receive = {
     case ShowMessage(message) => translateAndShow(message)
-    case _ => log.error("THe show message actor has received a message it can understand.")
+    case _ => Logger.error("THe show message actor has received a message it can understand.")
   }
 
   private def translateAndShow(message: String) = {
+    Logger.debug("Let's translate this message " + message)
     val led = Led17
     val morseTranslation = MorseTranslator.toMorse(message)
     val ledInteractions = LedController.toLedInteractions(morseTranslation, led)
@@ -21,16 +23,16 @@ class ShowMessageActor extends Actor with ActorLogging {
   }
 
   private def showMessageInLed17(ledInteractions: Seq[LedInteraction], led: Led) = {
-    val pin = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_17, "DottoLed", PinState.LOW)
-
+    Logger.debug("Let's show this led interactions using the GPIO API " + ledInteractions)
+    val gpio = GpioFactory.getInstance()
+    val pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_26, "DottoLed", PinState.LOW)
     pin.setShutdownOptions(true, PinState.LOW)
-    ledInteractions.foreach { interaction =>
-      interaction match {
-        case LedInteraction(_, High, _) => pin.high()
-        case LedInteraction(_, Low, _) => pin.low()
-      }
-      Thread.sleep(interaction.duration.toMillis)
+    Logger.debug("Pin number 26 initialized to LOW")
+    ledInteractions.foreach {
+      case LedInteraction(_, High, duration) => pin.pulse(duration.toMillis, PinState.HIGH, true); Logger.debug("HIGH :_)")
+      case LedInteraction(_, Low, duration) => pin.pulse(duration.toMillis, PinState.LOW, true); Logger.debug("LOW :_(")
     }
+    gpio.shutdown()
   }
 }
 
