@@ -34,7 +34,7 @@ class ShowMessageActor extends Actor {
   }
 
   /**
-    * Based on a ledInteractions sequence manipulates the led configured in the GPIO_26 pin using PI4J library.
+    * Based on a led interactions sequence manipulates the led configured in the GPIO_26 pin using PI4J library.
     */
   private def showMessageInLed(ledInteractions: Seq[LedInteraction]) = {
     Logger.debug("Let's show this led interactions using the GPIO API " + ledInteractions)

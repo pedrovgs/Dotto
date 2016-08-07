@@ -3,7 +3,7 @@ Dotto [![Build Status](https://travis-ci.org/pedrovgs/Dotto.svg?branch=master)](
 
 Dotto is an Open Source morse translator developed to practice [Scala][scala]. This is the first proyect I have developed using [Scala][scala] and [Play Framework][playframework].
 
-Once Dotto is started you can access to a little web site where an text filed will be used to translate your messages from plain text into morse pulses. To show the morse translation of your messages Dotto uses a led connected at a [Raspberry Pi][raspberrypi].
+Once Dotto has been initialized you can access to a little web site where a text filed will be used to translate your messages from plain text into morse pulses. To show the morse translation of your messages Dotto uses a led connected at a [Raspberry Pi][raspberrypi].
 
 #Screencasts
 
@@ -47,11 +47,11 @@ To start using Dotto you will need to first set up your components. Take your [R
 
 ![raspberrypiStep3][raspberryScreenshot3]
 
-* Connect the resistence to the same GPI 26 pin using the breadboard and also the other part of the resistance negative pin.
+* Connect the resistence to the same GPIO 26 pin using the breadboard and the other part of the resistance negative pin.
 
 ![raspberrypiStep3][raspberryScreenshot4]
 
-* Clone Dotto and build it for distribution from your Raspberry Pi or your PC. This will generate a zip file with a binary we can execute inside.
+* Clone Dotto and build it for distribution from your Raspberry Pi or your PC. This will generate a zip file with a binary we can execute.
 
 ```
 $ git clone git@github.com:pedrovgs/Dotto.git
@@ -59,7 +59,7 @@ $ cd Dotto
 $ activator dist
 ```
 
-* Copy the distribution zip generated to your Raspberry Pi and unzip the file.
+* Copy the zip file generated to your Raspberry Pi and unzip the file.
 
 ```
 $ scp target/universal/dotto-1.0-SNAPSHOT.zip pi@192.168.1.129:/home/pi
