@@ -1,20 +1,74 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@(result: String = "", error: String = "")
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dotto</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href=@routes.Assets.at("stylesheets/materialize.min.css")
+          media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<div class="container">
+    <h1 class="header center teal-text">Welcome to Dotto!</h1>
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @play20.welcome(message, style = "Scala")
+    <h5 class="center-align teal-text">Translate your messages into Morse Code</h5>
 
-}
+    <div class="row">
+        <form class="col s12" action="@routes.DottoController.toMorse" method="post">
+            <div class="input-field">
+                <input placeholder="Message" id="message" name="message" type="text" class="validate">
+                <input type="submit" class="waves-effect waves-light btn">
+            </div>
+        </form>
+    </div>
+
+    @if(!result.isEmpty) {
+    <h2 class="center teal-text">Your message: "@Html(result)" has been translated and added to the queue.</h2>
+    }
+
+    @if(!error.isEmpty) {
+    <h2 class="center teal-text">@Html(error)</h2>
+    }
+
+</div>
+
+<footer class="page-footer white">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="teal-text">Dotto</h5>
+                <p class="teal-text text-lighten-2">In 2016 I decided that Scala was going to be the new language I
+                    was going to learn. In order to start playing with Scala I decided to develop a pet project to
+                    translate plain text messages into the morse representation. Using a led connected at a RaspberryPi
+                    showing the translated message as led pulses. Dotto is an Open Source project created to learn
+                    Scala. Visit https://www.github.com/Dotto if you want to contribute.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="teal-text">By Pedro Vicente Gómez Sánchez</h5>
+                <ul>
+                    <li><a class="teal-text text-lighten-2" href="#!">https://www.github.com/pedrovgs/Dotto</a></li>
+                    <li><a class="teal-text text-lighten-2" href="#!">https://www.github.com/pedrovgs</a></li>
+                    <li><a class="teal-text text-lighten-2" href="#!">https://twitter.com/pedro_g_s</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright white">
+        <div class="container teal-text text-lighten-2">
+            © 2016 Copyright Pedro Vicente Gómez Sánchez
+        </div>
+    </div>
+</footer>
+
+<!--Import jQuery and materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src=@routes.Assets.at("javascripts/materialize.min.js")></script>
+
+</body>
+</html>
+
