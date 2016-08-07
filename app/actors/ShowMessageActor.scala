@@ -35,7 +35,7 @@ class ShowMessageActor extends Actor {
       }
       Thread.sleep(interaction.duration.toMillis)
     }
-    Logger.debug("Message translated and shown in the RaspberrryPI LED")
+    Logger.debug("Message translated and shown in the Raspberrypi LED")
     gpio.unprovisionPin(pin)
     gpio.shutdown()
   }

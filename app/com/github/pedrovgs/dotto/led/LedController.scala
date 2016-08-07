@@ -6,7 +6,7 @@ import scala.concurrent.duration._
 
 object LedController {
 
-  private val DotDuration = 0.2 seconds
+  private val DotDuration = 0.1 seconds
   private val DashDuration = DotDuration * 3
   private val SpaceDuration = DashDuration * 3
 
