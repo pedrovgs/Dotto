@@ -28,10 +28,15 @@ class ShowMessageActor extends Actor {
     val pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_26, "DottoLed", PinState.LOW)
     pin.setShutdownOptions(true, PinState.LOW)
     Logger.debug("Pin number 26 initialized to LOW")
-    ledInteractions.foreach {
-      case LedInteraction(_, High, duration) => pin.pulse(duration.toMillis, PinState.HIGH, true); Logger.debug("HIGH :_)")
-      case LedInteraction(_, Low, duration) => pin.pulse(duration.toMillis, PinState.LOW, true); Logger.debug("LOW :_(")
+    ledInteractions.foreach { interaction =>
+      interaction match {
+        case LedInteraction(_, High, duration) => pin.high(); Logger.debug("HIGH :_)")
+        case LedInteraction(_, Low, duration) => pin.low(); Logger.debug("LOW :_(")
+      }
+      Thread.sleep(interaction.duration.toMillis)
     }
+    Logger.debug("Message translated and shown in the RaspberrryPI LED")
+    gpio.unprovisionPin(pin)
     gpio.shutdown()
   }
 }
