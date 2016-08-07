@@ -1,7 +1,5 @@
 package com.github.pedrovgs.dotto.morse
 
-import com.github.pedrovgs.dotto.morse.MorseAlphabet.{Dash, Dot, Space, MorseSymbol}
-
 
 /**
   * Translates a String passed as parameter into the morse representation and vice versa. The rules followed to
@@ -51,12 +49,19 @@ object MorseTranslator {
     charToMorseSymbol.map(_.swap)
   }
 
+  /**
+    * Given a String translates every character into a Seq[MorseSymbol]. Non supported characters are ignored.
+    */
   def toMorse(text: String): Seq[Seq[MorseSymbol]] = {
     text.trim.flatMap(letter =>
       charToMorseSymbol.get(letter.toLower)
     )
   }
 
+  /**
+    * Given a Seq[Seq[MorseSymbol] translates every Seq[MorseSymbol] into a character and joins the result generating
+    * the full sentece into the strign representation.
+    */
   def fromMorse(morse: Seq[Seq[MorseSymbol]]): String = {
     morse.flatMap(symbol =>
       morseSymbolToChar.get(symbol)

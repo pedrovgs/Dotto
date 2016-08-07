@@ -1,7 +1,7 @@
 package com.github.pedrovgs.dotto.morse
 
 import com.github.pedrovgs.dotto.Resources
-import com.github.pedrovgs.dotto.morse.MorseAlphabet._
+import com.github.pedrovgs.dotto.morse.{Dot, Dash, Space}
 import org.scalatest.FlatSpec
 
 class MorseTranslatorSpec extends FlatSpec with Resources {
