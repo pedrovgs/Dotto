@@ -1,3 +1,4 @@
 GET     /                           controllers.DottoController.index
 POST    /                           controllers.DottoController.toMorse
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /favicon.ico                controllers.Assets.at(path="/public", file="images/favicon.ico")
