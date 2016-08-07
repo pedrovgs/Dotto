@@ -21,7 +21,7 @@ class ShowMessageActor extends Actor with ActorLogging {
   }
 
   private def showMessageInLed17(ledInteractions: Seq[LedInteraction], led: Led) = {
-    val pin = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_17)
+    val pin = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_17, "DottoLed", PinState.LOW)
 
     pin.setShutdownOptions(true, PinState.LOW)
     ledInteractions.foreach { interaction =>
