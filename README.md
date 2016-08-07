@@ -35,17 +35,17 @@ To start using Dotto you will need to first set up your components. Take your [R
 
 #Steps
 
-* Connect the Raspberry Pi with an already installed [Raspbian][raspbian] distribution. Dotto will need an internet connection, remember to connect your Raspberry Pi to an internet connection.
+* Connect the Raspberry Pi with an already installed [Raspbian][raspbian] distribution. Dotto will need a LAN connection, remember to connect your Raspberry Pi to your local network.
 
 ![raspberrypiStep1][raspberryScreenshot1]
 
-* Connect the Raspberry Pi [GPIO pins][gpio] to a [Breadboard][breadboard]. This is not mandatory but could be interesting if you want to reuse your Raspberry Pi GPIO pins. 
+* Connect the Raspberry Pi [GPIO pins][gpio] to a [Breadboard][breadboard]. This is not mandatory but could be interesting if you want to reuse your Raspberry Pi GPIO pins in the future. 
 
 ![raspberrypiStep2][raspberryScreenshot2]
 
 * Connect the led anode to the GPIO 26 pin and the led catode to the closet ground pin.
 
-![raspberrypiStep2][raspberryScreenshot3]
+![raspberrypiStep3][raspberryScreenshot3]
 
 * Connect the resistence to the same GPI 26 pin using the breadboard and also the other part of the resistance negative pin.
 
@@ -63,16 +63,25 @@ $ activator dist
 
 ```
 $ scp target/universal/dotto-1.0-SNAPSHOT.zip pi@192.168.1.129:/home/pi
+$ ssh pi@192.168.1.129
 $ unzip dotto-1.0-SNAPSHOT.zip
 ```
 
 * Execute Dotto as sudo. The library used to interact with the GPIO leds requires to be root, sorry.
 
 ```
-$ sudo nohup dotto-1.0-SNAPSHOT/bin/dotto -Dapplication.secret=dotto -Dhttp.port=80
+$ sudo nohup dotto-1.0-SNAPSHOT/bin/dotto -Dapplication.secret=dotto -Dhttp.port=80 &
 ```
 
 * Open your web browser and use the Raspberry Pi local IP as host. You'll se how the Dotto landing page will be shown and you can start sending messages to your Raspberry Pi. You can use your phone, PC or any other device connected to the same local network with a browser installed.
+
+![dottoMobileScreenshot][dottoMobileScreenshot]
+
+#Libraries used
+
+* [Play Framework][playframework]
+* [PI4J][pi4j]
+* [Scala Test][scalatest]
 
 #Why?
 
@@ -122,3 +131,8 @@ License
 [breadboard]: https://en.wikipedia.org/wiki/Breadboard
 [raspberryScreenshot1]: ./art/raspberryScreenshot1.jpg
 [raspberryScreenshot2]: ./art/raspberryScreenshot2.jpg
+[raspberryScreenshot3]: ./art/raspberryScreenshot3.jpg
+[raspberryScreenshot4]: ./art/raspberryScreenshot4.jpg
+[dottoMobileScreenshot]: ./art/dottoMobileScreenshot.png
+[pi4j]: http://pi4j.com/
+[scalatest]: http://www.scalatest.org/
