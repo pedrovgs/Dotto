@@ -1,7 +1,82 @@
-Dotto
+Dotto [![Build Status](https://travis-ci.org/pedrovgs/Dotto.svg?branch=master)](https://travis-ci.org/pedrovgs/Dotto)
 =================================
 
-Project under development.
+Dotto is an Open Source morse translator developed to practice [Scala][scala]. This is the first proyect I have developed using [Scala][scala] and [Play Framework][playframework].
+
+Once Dotto is started you can access to a little web site where an text filed will be used to translate your messages from plain text into morse pulses. To show the morse translation of your messages Dotto uses a led connected at a [Raspberry Pi][raspberrypi].
+
+#Screencasts
+
+Dotto web site:
+
+![Screencast1][screencast1]
+
+Dotto RaspberryPi:
+
+![Screencast2][screencast2]
+
+#Usage
+
+To start using Dotto you will need to first set up your components. Take your [Raspberry Pi][raspberrypi] a [led][led] and a [330 OHM resistance][resistance]. 
+
+#Materials
+
+* Raspberry Pi:
+
+![RaspberryPI][raspberryPiImage]
+
+* 5mm Led:
+
+![Led][led]
+
+* 330 OHM Resistance:
+
+![Resistance][resistance]
+
+#Steps
+
+* Connect the Raspberry Pi with an already installed [Raspbian][raspbian] distribution. Dotto will need an internet connection, remember to connect your Raspberry Pi to an internet connection.
+
+![raspberrypiStep1][raspberryScreenshot1]
+
+* Connect the Raspberry Pi [GPIO pins][gpio] to a [Breadboard][breadboard]. This is not mandatory but could be interesting if you want to reuse your Raspberry Pi GPIO pins. 
+
+![raspberrypiStep2][raspberryScreenshot2]
+
+* Connect the led anode to the GPIO 26 pin and the led catode to the closet ground pin.
+
+![raspberrypiStep2][raspberryScreenshot3]
+
+* Connect the resistence to the same GPI 26 pin using the breadboard and also the other part of the resistance negative pin.
+
+![raspberrypiStep3][raspberryScreenshot4]
+
+* Clone Dotto and build it for distribution from your Raspberry Pi or your PC. This will generate a zip file with a binary we can execute inside.
+
+```
+$ git clone git@github.com:pedrovgs/Dotto.git
+$ cd Dotto
+$ activator dist
+```
+
+* Copy the distribution zip generated to your Raspberry Pi and unzip the file.
+
+```
+$ scp target/universal/dotto-1.0-SNAPSHOT.zip pi@192.168.1.129:/home/pi
+$ unzip dotto-1.0-SNAPSHOT.zip
+```
+
+* Execute Dotto as sudo. The library used to interact with the GPIO leds requires to be root, sorry.
+
+```
+$ sudo nohup dotto-1.0-SNAPSHOT/bin/dotto -Dapplication.secret=dotto -Dhttp.port=80
+```
+
+* Open your web browser and use the Raspberry Pi local IP as host. You'll se how the Dotto landing page will be shown and you can start sending messages to your Raspberry Pi. You can use your phone, PC or any other device connected to the same local network with a browser installed.
+
+#Why?
+
+¯\(ツ)/¯ I want to learn Scala and I had Raspberry Pi I wasn't using :)
 
 
 Developed By
@@ -32,3 +107,18 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+   
+   
+[playframework]: https://www.playframework.com/
+[scala]: scala-lang.org
+[raspberrypi]: https://www.raspberrypi.org/
+[screencast1]: ./art/dottoScreencast.gif
+[screencast2]: ./art/dottoRaspberrypiScreencast.gif
+[led]: https://cdn.shopify.com/s/files/1/1040/8806/products/amarilloclaro5mm_c789318f-e943-4d0f-ae4f-96ff47544b06.jpeg?v=1454364402
+[resistance]: https://shop.mchobby.be/116-large_default/resistance-10-kohms-10-pce.jpg
+[raspberryPiImage]: https://www.adafruit.com/includes/templates/adafruit2013/images/little_pi.png
+[raspbian]: https://www.raspbian.org/
+[gpio]: https://www.raspberrypi.org/documentation/usage/gpio/
+[breadboard]: https://en.wikipedia.org/wiki/Breadboard
+[raspberryScreenshot1]: ./art/raspberryScreenshot1.jpg
+[raspberryScreenshot2]: ./art/raspberryScreenshot2.jpg

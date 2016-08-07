@@ -3,7 +3,6 @@ package controllers
 import javax.inject._
 
 import actors.ShowMessageActor
-import actors.ShowMessageActor.ShowMessage
 import akka.actor.ActorSystem
 import play.api.Logger
 import play.api.data.Forms._
@@ -44,7 +43,7 @@ class DottoController @Inject()(val messagesApi: MessagesApi, val actorSystem: A
         BadRequest(views.html.index(error = "The message can't be empty ¯\\_(ツ)_/¯"))
       },
       messagePosted => {
-        showMessageActor ! ShowMessage(messagePosted)
+        //showMessageActor ! ShowMessage(messagePosted)
         Logger.debug("Message enqueued to be translated " + request)
         Created(views.html.index(result = messagePosted))
       }
