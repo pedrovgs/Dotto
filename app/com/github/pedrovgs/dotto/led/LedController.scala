@@ -11,7 +11,7 @@ object LedController {
   private val SpaceDuration = DashDuration * 3
 
   def toLedInteractions(morseSentence: Seq[Seq[MorseSymbol]], led: Led): Seq[LedInteraction] = {
-    val spaceBetweenSymbols = LedInteraction(led, Low, DotDuration)
+    val spaceBetweenSymbols = LedInteraction(led, Low, DotDuration * 2)
     morseSentence.flatten.map {
       case Dot => LedInteraction(led, High, DotDuration)
       case Dash => LedInteraction(led, High, DashDuration)
