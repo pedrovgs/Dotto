@@ -19,7 +19,7 @@ Developed By
 License
 -------
 
-    Copyright 2015 Pedro Vicente Gómez Sánchez
+    Copyright 2016 Pedro Vicente Gómez Sánchez
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
