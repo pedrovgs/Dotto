@@ -1,5 +1,7 @@
 package com.github.pedrovgs.dotto.led
 
+import scala.concurrent.duration.Duration
+
 sealed trait PinState
 
 case object High extends PinState
@@ -20,5 +22,5 @@ case object Led17 extends Led {
 
 }
 
-case class LedInteraction(led: Led, state: PinState, duration: Double)
+case class LedInteraction(led: Led, state: PinState, duration: Duration)
 

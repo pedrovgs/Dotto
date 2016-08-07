@@ -2,6 +2,9 @@ package controllers
 
 import javax.inject._
 
+import actors.ShowMessageActor
+import actors.ShowMessageActor.ShowMessage
+import akka.actor.ActorSystem
 import play.api.data.Forms._
 import play.api.data._
 import play.api.i18n.{I18nSupport, MessagesApi}
@@ -12,9 +15,10 @@ import play.api.mvc._
   * message into morse.
   */
 @Singleton
-class DottoController @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport {
+class DottoController @Inject()(val messagesApi: MessagesApi, val actorSystem: ActorSystem) extends Controller with I18nSupport {
 
   private val messageForm = Form("message" -> nonEmptyText)
+  private val showMessageActor = actorSystem.actorOf(ShowMessageActor.props)
 
   /**
     * Main application endpoint. All the requests to the root domain path will arrive here.
@@ -36,6 +40,7 @@ class DottoController @Inject()(val messagesApi: MessagesApi) extends Controller
         BadRequest(views.html.index(error = "The message can't be empty ¯\\_(ツ)_/¯"))
       },
       messagePosted => {
+        showMessageActor ! ShowMessage(messagePosted)
         Created(views.html.index(result = messagePosted))
       }
     )
