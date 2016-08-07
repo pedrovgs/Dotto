@@ -62,15 +62,15 @@ $ activator dist
 * Copy the zip file generated to your Raspberry Pi and unzip the file.
 
 ```
-$ scp target/universal/dotto-1.0-SNAPSHOT.zip pi@192.168.1.129:/home/pi
+$ scp target/universal/dotto-1.0.zip pi@192.168.1.129:/home/pi
 $ ssh pi@192.168.1.129
-$ unzip dotto-1.0-SNAPSHOT.zip
+$ unzip dotto-1.0.zip
 ```
 
 * Execute Dotto as sudo. The library used to interact with the GPIO leds requires to be root, sorry.
 
 ```
-$ sudo nohup dotto-1.0-SNAPSHOT/bin/dotto -Dapplication.secret=dotto -Dhttp.port=80 &
+$ sudo nohup dotto-1.0/bin/dotto -Dapplication.secret=dotto -Dhttp.port=80 &
 ```
 
 * Open your web browser and use the Raspberry Pi local IP as host. You'll se how the Dotto landing page will be shown and you can start sending messages to your Raspberry Pi. You can use your phone, PC or any other device connected to the same local network with a browser installed.
