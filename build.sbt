@@ -11,6 +11,7 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   "com.pi4j" % "pi4j-core" % "1.1",
+  "org.typelevel" %% "cats" % "0.7.2",
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
 )
 
