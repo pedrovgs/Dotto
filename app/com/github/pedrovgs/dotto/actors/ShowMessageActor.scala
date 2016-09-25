@@ -1,7 +1,7 @@
-package actors
+package com.github.pedrovgs.dotto.actors
 
-import actors.ShowMessageActor.ShowMessage
 import akka.actor.{Actor, Props}
+import com.github.pedrovgs.dotto.actors.ShowMessageActor.ShowMessage
 import com.github.pedrovgs.dotto.led._
 import com.github.pedrovgs.dotto.morse.MorseTranslator
 import com.pi4j.io.gpio._

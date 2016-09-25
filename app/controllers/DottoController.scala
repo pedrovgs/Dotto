@@ -2,8 +2,8 @@ package controllers
 
 import javax.inject._
 
-import actors.ShowMessageActor
-import actors.ShowMessageActor.ShowMessage
+import com.github.pedrovgs.dotto.actors.ShowMessageActor
+import com.github.pedrovgs.dotto.actors.ShowMessageActor.ShowMessage
 import akka.actor.ActorSystem
 import play.api.Logger
 import play.api.data.Forms._
