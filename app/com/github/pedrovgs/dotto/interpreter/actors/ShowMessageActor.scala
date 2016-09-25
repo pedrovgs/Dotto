@@ -7,9 +7,9 @@ import com.github.pedrovgs.dotto.interpreter.actors.ShowMessageActor.ShowMessage
 import play.api.Logger
 
 /**
-  * Akka actor used to show messages into the Led previously configured. The Akka actors sytem has been configured to
-  * use a pool max size equals to one. Based on this modification this actor is going to act as a blocking queue.
-  * Review the application configuration where this change has been imlpemented if needed.
+  * Akka actor used to show messages into the Led previously configured. The Akka actors system by default ensures that
+  * any actor instance will handle messages one by one. Based on this implementation this actor is going to act as a
+  * blocking queue.
   */
 class ShowMessageActor extends Actor {
 
