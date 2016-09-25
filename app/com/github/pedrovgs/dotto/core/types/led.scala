@@ -1,4 +1,4 @@
-package com.github.pedrovgs.dotto.interpreter.led
+package com.github.pedrovgs.dotto.core.types
 
 import scala.concurrent.duration.Duration
 

@@ -15,26 +15,31 @@ class DottoInterpreter(val showMessageActor: ActorRef) extends (Instruction ~> I
 
   def apply[A](i: Instruction[A]): Id[A] = i match {
     case EnqueueMessage(messageToEnqueue) => enqueueMessage(messageToEnqueue)
-    case TranslateMessage(messageToTranslate) => translateMessage(messageToTranslate)
-    case ShowMorseSentence(messageToEnqueue) => showMorseSentence(messageToEnqueue)
+    case TranslateMessageIntoMorse(messageToTranslate) => translateMessageIntoMorse(messageToTranslate)
+    case TranslateIntoLedInteractions(morseSentence) => translateIntoLedInteractions(morseSentence)
+    case ShowLedInteractions(ledInteractions) => showMorseSentence(ledInteractions)
   }
 
   private def enqueueMessage(message: Message): Message = {
-    showMessageActor ! ShowMessage(message)
     Logger.debug("Message enqueued to be translated: " + message)
+    showMessageActor ! ShowMessage(message)
     message
   }
 
-  private def translateMessage(message: Message): MorseSentence = {
+  private def translateMessageIntoMorse(message: Message): MorseSentence = {
     Logger.debug("Message translated: " + message)
     toMorse(message)
   }
 
-  private def showMorseSentence(morseSentence: MorseSentence): MorseSentence = {
-    Logger.debug("Showing morse sentence: " + morseSentence)
-    val ledInteraction = toLedInteractions(morseSentence)
-    showMorseSentenceInLed(ledInteraction)
-    morseSentence
+  private def translateIntoLedInteractions(morseSentence: MorseSentence): LedInteractions = {
+    Logger.debug("Translating morse sentence into led interactions: " + morseSentence)
+    toLedInteractions(morseSentence)
+  }
+
+  private def showMorseSentence(ledInteractions: LedInteractions): LedInteractions= {
+    Logger.debug("Showing led interactions: " + ledInteractions)
+    showMorseSentenceInLed(ledInteractions)
+    ledInteractions
   }
 
 }

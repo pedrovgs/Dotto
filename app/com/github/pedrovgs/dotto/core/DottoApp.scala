@@ -18,8 +18,9 @@ object DottoApp {
   def translateAndShowMessageProgram: Message => Free[Instruction, MorseSentence] = {
     messageToShow: Message =>
       for {
-        morseSentence <- translateMessage(messageToShow)
-        _ <- showMorseSentence(morseSentence)
+        morseSentence <- translateMessageIntoMorse(messageToShow)
+        ledInteractions <- translateIntoLedInteractions(morseSentence)
+        _ <- showLedInteractions(ledInteractions)
       } yield morseSentence
   }
 }

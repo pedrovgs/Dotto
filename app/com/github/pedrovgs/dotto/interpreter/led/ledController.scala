@@ -1,5 +1,6 @@
 package com.github.pedrovgs.dotto.interpreter.led
 
+import com.github.pedrovgs.dotto.core.algebra.dotto.{LedInteractions, MorseSentence}
 import com.github.pedrovgs.dotto.core.types._
 import com.pi4j.io.gpio._
 import play.api.Logger
@@ -20,7 +21,7 @@ object ledController {
     * inside the sentence represented with a sequence of MorseSymbols will be separated to the rest of the words using a
     * space led interaction.
     */
-  def toLedInteractions(morseSentence: Seq[Seq[MorseSymbol]]): Seq[LedInteraction] = {
+  def toLedInteractions(morseSentence: MorseSentence): LedInteractions = {
     morseSentence.flatten.map {
       case Dot => LedInteraction(High, DotDuration)
       case Dash => LedInteraction(High, DashDuration)
@@ -31,7 +32,7 @@ object ledController {
   /**
     * Based on a led interactions sequence manipulates the led configured in the GPIO_26 pin using PI4J library.
     */
-  def showMorseSentenceInLed(ledInteractions: Seq[LedInteraction]) = {
+  def showMorseSentenceInLed(ledInteractions: LedInteractions) = {
     Logger.debug("Let's show this led interactions using the GPIO API: " + ledInteractions)
     val gpio = GpioFactory.getInstance()
     val pin = initGPIO26Pin(gpio)
@@ -52,7 +53,7 @@ object ledController {
   /**
     * Performs changes into the pin state representing the LedInteraction sequence into real led pulses.
     */
-  private def showLedInteractionsInLed(ledInteractions: Seq[LedInteraction], pin: GpioPinDigitalOutput) = {
+  private def showLedInteractionsInLed(ledInteractions: LedInteractions, pin: GpioPinDigitalOutput) = {
     ledInteractions.foreach { interaction =>
       interaction match {
         case LedInteraction(High, duration) => pin.high(); Logger.debug("HIGH")

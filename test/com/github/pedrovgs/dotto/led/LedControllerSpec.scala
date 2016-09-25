@@ -1,7 +1,6 @@
 package com.github.pedrovgs.dotto.led
 
 import com.github.pedrovgs.dotto.core.types._
-import com.github.pedrovgs.dotto.interpreter.led.{High, LedInteraction, Low}
 import com.github.pedrovgs.dotto.interpreter.led.ledController._
 import org.scalatest.FlatSpec
 
