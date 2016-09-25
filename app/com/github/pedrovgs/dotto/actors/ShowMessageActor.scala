@@ -2,8 +2,8 @@ package com.github.pedrovgs.dotto.actors
 
 import akka.actor.{Actor, Props}
 import com.github.pedrovgs.dotto.actors.ShowMessageActor.ShowMessage
+import com.github.pedrovgs.dotto.core.algebra.morse._
 import com.github.pedrovgs.dotto.led._
-import com.github.pedrovgs.dotto.morse.MorseTranslator
 import com.pi4j.io.gpio._
 import play.api.Logger
 
@@ -28,7 +28,7 @@ class ShowMessageActor extends Actor {
     */
   private def translateAndShow(message: String) = {
     Logger.debug("Let's translate this message " + message)
-    val morseTranslation = MorseTranslator.toMorse(message)
+    val morseTranslation = toMorse(message)
     val ledInteractions = LedController.toLedInteractions(morseTranslation)
     showMessageInLed(ledInteractions)
   }

@@ -1,6 +1,6 @@
 package com.github.pedrovgs.dotto.led
 
-import com.github.pedrovgs.dotto.morse.{Dash, Dot, MorseSymbol, Space}
+import com.github.pedrovgs.dotto.core.types._
 
 import scala.concurrent.duration._
 
