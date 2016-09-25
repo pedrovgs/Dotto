@@ -1,7 +1,6 @@
 package com.github.pedrovgs.dotto.interpreter.led
 
 import com.github.pedrovgs.dotto.core.types._
-import com.pi4j.io.gpio.PinState
 import com.pi4j.io.gpio._
 import play.api.Logger
 
