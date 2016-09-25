@@ -1,7 +1,8 @@
 package com.github.pedrovgs.dotto.core.algebra
 
 import com.github.pedrovgs.dotto.Resources
-import com.github.pedrovgs.dotto.core.algebra.morse._
+import com.github.pedrovgs.dotto.morse.translator
+import translator._
 import com.github.pedrovgs.dotto.core.types.{Dash, Dot, Space}
 import org.scalatest.FlatSpec
 
