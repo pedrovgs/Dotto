@@ -1,8 +1,8 @@
-package com.github.pedrovgs.dotto.morse
+package com.github.pedrovgs.dotto.interpreter.morse
 
 import com.github.pedrovgs.dotto.core.types._
 
-object translator {
+object morseTranslator {
 
   private val charToMorseSymbol: Map[Char, Seq[MorseSymbol]] = Map('a' -> List(Dot, Dash),
     'b' -> List(Dash, Dot, Dot, Dot),

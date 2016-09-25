@@ -1,12 +1,11 @@
-package com.github.pedrovgs.dotto.core.algebra
+package com.github.pedrovgs.dotto.morse
 
 import com.github.pedrovgs.dotto.Resources
-import com.github.pedrovgs.dotto.morse.translator
-import translator._
 import com.github.pedrovgs.dotto.core.types.{Dash, Dot, Space}
+import com.github.pedrovgs.dotto.interpreter.morse.morseTranslator._
 import org.scalatest.FlatSpec
 
-class MorseAlgebraSpec extends FlatSpec with Resources {
+class MorseTranslatorSpec extends FlatSpec with Resources {
 
   it should "return an empty list if the input is an empty String" in {
     val emptyTranslation = toMorse("")
