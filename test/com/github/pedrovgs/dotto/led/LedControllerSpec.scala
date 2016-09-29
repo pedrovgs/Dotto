@@ -8,10 +8,10 @@ import scala.concurrent.duration._
 
 class LedControllerSpec extends FlatSpec {
 
-  private val AnyMorseSymbolSeq = Seq(Seq(Dot, Dot, Dash), Seq(Dash, Space, Dot, Dash, Dot))
+  private val AnyMorseSymbolSeq = List(List(Dot, Dot, Dash), List(Dash, Space, Dot, Dash, Dot))
 
   it should "return an empty sequence if the input is an empty sequence" in {
-    val emptySentence = Seq[Seq[MorseSymbol]]()
+    val emptySentence = List[List[MorseSymbol]]()
 
     val result = toLedInteractions(emptySentence)
 
@@ -30,7 +30,7 @@ class LedControllerSpec extends FlatSpec {
   }
 
   it should "return transform even symbols into led interactions" in {
-    val symbols = Seq(Seq(Dot, Dash, Space))
+    val symbols = List(List(Dot, Dash, Space))
     val result = toLedInteractions(symbols)
 
     assert(result(0) == LedInteraction(High, 0.1 seconds))

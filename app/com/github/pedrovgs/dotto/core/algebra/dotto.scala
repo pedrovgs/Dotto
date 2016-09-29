@@ -9,8 +9,8 @@ import com.github.pedrovgs.dotto.core.types.{LedInteraction, MorseSymbol}
 object dotto {
 
   type Message = String
-  type MorseSentence = Seq[Seq[MorseSymbol]]
-  type LedInteractions = Seq[LedInteraction]
+  type MorseSentence = List[List[MorseSymbol]]
+  type LedInteractions = List[LedInteraction]
 
   sealed trait Instruction[A]
 

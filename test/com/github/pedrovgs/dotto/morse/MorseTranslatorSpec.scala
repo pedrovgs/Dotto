@@ -70,7 +70,7 @@ class MorseTranslatorSpec extends FlatSpec with Resources {
   }
 
   it should "return an empty string if the input does not contains a valid sequence of morse symbols" in {
-    val invalidMorseSentence = Seq(Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot), Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot))
+    val invalidMorseSentence = List(List(Dot, Dot, Dash, Dot, Dash, Dot, Dot), List(Dot, Dot, Dash, Dot, Dash, Dot, Dot))
 
     val translatedString = fromMorse(invalidMorseSentence)
 
@@ -78,17 +78,17 @@ class MorseTranslatorSpec extends FlatSpec with Resources {
   }
 
   it should "replace invalid letters translating from morse to string with spaces and trim the result" in {
-    val invalidMorseSentence = Seq(
-      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
-      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
-      Seq(Dot, Dash, Dash, Dot),
-      Seq(Dot, Dot, Dot, Dash),
-      Seq(Space),
-      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
-      Seq(Dash, Dash, Dot),
-      Seq(Dot, Dot, Dot),
-      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
-      Seq(Dot, Dot, Dash, Dot, Dash, Dot, Dot))
+    val invalidMorseSentence = List(
+      List(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
+      List(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
+      List(Dot, Dash, Dash, Dot),
+      List(Dot, Dot, Dot, Dash),
+      List(Space),
+      List(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
+      List(Dash, Dash, Dot),
+      List(Dot, Dot, Dot),
+      List(Dot, Dot, Dash, Dot, Dash, Dot, Dot),
+      List(Dot, Dot, Dash, Dot, Dash, Dot, Dot))
 
     val translatedString = fromMorse(invalidMorseSentence)
 

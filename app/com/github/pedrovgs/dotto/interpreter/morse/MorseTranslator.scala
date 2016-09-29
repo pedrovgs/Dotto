@@ -4,7 +4,7 @@ import com.github.pedrovgs.dotto.core.types._
 
 object morseTranslator {
 
-  private val charToMorseSymbol: Map[Char, Seq[MorseSymbol]] = Map('a' -> List(Dot, Dash),
+  private val charToMorseSymbol: Map[Char, List[MorseSymbol]] = Map('a' -> List(Dot, Dash),
     'b' -> List(Dash, Dot, Dot, Dot),
     'c' -> List(Dash, Dot, Dash, Dot),
     'd' -> List(Dash, Dot, Dot),
@@ -42,24 +42,24 @@ object morseTranslator {
     '8' -> List(Dash, Dash, Dash, Dot, Dot),
     '9' -> List(Dash, Dash, Dash, Dash, Dot))
 
-  private lazy val morseSymbolToChar: Map[Seq[MorseSymbol], Char] = {
+  private lazy val morseSymbolToChar: Map[List[MorseSymbol], Char] = {
     charToMorseSymbol.map(_.swap)
   }
 
   /**
     * Given a String translates every character into a Seq[MorseSymbol]. Non supported characters are ignored.
     */
-  def toMorse(text: String): Seq[Seq[MorseSymbol]] = {
+  def toMorse(text: String): List[List[MorseSymbol]] = {
     text.trim.flatMap(letter =>
       charToMorseSymbol.get(letter.toLower)
-    )
+    ).toList
   }
 
   /**
     * Given a Seq[Seq[MorseSymbol] translates every Seq[MorseSymbol] into a character and joins the result generating
     * the full sentece into the strign representation.
     */
-  def fromMorse(morse: Seq[Seq[MorseSymbol]]): String = {
+  def fromMorse(morse: List[List[MorseSymbol]]): String = {
     morse.flatMap(symbol =>
       morseSymbolToChar.get(symbol)
     ).mkString
