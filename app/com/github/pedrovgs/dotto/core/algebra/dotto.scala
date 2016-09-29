@@ -12,7 +12,7 @@ object dotto {
   type MorseSentence = List[List[MorseSymbol]]
   type LedInteractions = List[LedInteraction]
 
-  sealed trait Instruction[A]
+  abstract class Instruction[A] extends Serializable with Product
 
   case class EnqueueMessage(messageToEnqueue: Message) extends Instruction[Message]
   case class TranslateMessageIntoMorse(messageToTranslate: Message) extends Instruction[MorseSentence]
