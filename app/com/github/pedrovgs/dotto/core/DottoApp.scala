@@ -2,6 +2,7 @@ package com.github.pedrovgs.dotto.core
 
 import cats.free.Free
 import com.github.pedrovgs.dotto.core.algebra.dotto._
+import com.github.pedrovgs.dotto.core.algebra.dotto.dsl._
 
 /**
   * Declares the two programs Dotto implements.
