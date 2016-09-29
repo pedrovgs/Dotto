@@ -8,19 +8,17 @@ import com.github.pedrovgs.dotto.core.algebra.dotto._
   */
 object DottoApp {
 
-  def enqueueMessageProgram: Message => Free[Instruction, Message] = {
-    messageToEnqueue: Message =>
-      for {
-        message <- enqueueMessage(messageToEnqueue)
-      } yield message
+  type InstructionIO[A] = Free[Instruction, A]
+
+  def enqueueMessageProgram(message: Message): InstructionIO[Message] = {
+    enqueueMessage(message)
   }
 
-  def translateAndShowMessageProgram: Message => Free[Instruction, MorseSentence] = {
-    messageToShow: Message =>
-      for {
-        morseSentence <- translateMessageIntoMorse(messageToShow)
-        ledInteractions <- translateIntoLedInteractions(morseSentence)
-        _ <- showLedInteractions(ledInteractions)
-      } yield morseSentence
+  def translateAndShowMessageProgram(message: Message): InstructionIO[MorseSentence] = {
+    for {
+      morseSentence <- translateMessageIntoMorse(message)
+      ledInteractions <- translateIntoLedInteractions(morseSentence)
+      _ <- showLedInteractions(ledInteractions)
+    } yield morseSentence
   }
 }
