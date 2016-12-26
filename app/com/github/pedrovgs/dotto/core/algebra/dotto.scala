@@ -14,10 +14,10 @@ object dotto {
 
   abstract class Instruction[A] extends Serializable with Product
 
-  case class EnqueueMessage(messageToEnqueue: Message) extends Instruction[Message]
-  case class TranslateMessageIntoMorse(messageToTranslate: Message) extends Instruction[MorseSentence]
-  case class TranslateIntoLedInteractions(morseSentence: MorseSentence) extends Instruction[LedInteractions]
-  case class ShowLedInteractions(messageToEnqueue: LedInteractions) extends Instruction[LedInteractions]
+  final case class EnqueueMessage(messageToEnqueue: Message) extends Instruction[Message]
+  final case class TranslateMessageIntoMorse(messageToTranslate: Message) extends Instruction[MorseSentence]
+  final case class TranslateIntoLedInteractions(morseSentence: MorseSentence) extends Instruction[LedInteractions]
+  final case class ShowLedInteractions(messageToEnqueue: LedInteractions) extends Instruction[LedInteractions]
 
   object dsl {
     def enqueueMessage(messageToEnqueue: Message): Free[Instruction, Message] = Free.liftF(EnqueueMessage(messageToEnqueue))

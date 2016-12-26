@@ -7,4 +7,4 @@ sealed trait PinState
 case object Low extends PinState
 case object High extends PinState
 
-case class LedInteraction(state: PinState, duration: Duration)
+final case class LedInteraction(state: PinState, duration: Duration)

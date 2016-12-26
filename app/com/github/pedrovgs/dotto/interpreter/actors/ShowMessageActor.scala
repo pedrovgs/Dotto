@@ -37,6 +37,6 @@ class ShowMessageActor extends Actor {
 object ShowMessageActor {
   def props = Props[ShowMessageActor]
 
-  case class ShowMessage(message: String)
+  final case class ShowMessage(message: String)
 
 }
