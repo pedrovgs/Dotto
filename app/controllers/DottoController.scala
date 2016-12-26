@@ -2,9 +2,10 @@ package controllers
 
 import javax.inject._
 
-import actors.ShowMessageActor
-import actors.ShowMessageActor.ShowMessage
 import akka.actor.ActorSystem
+import com.github.pedrovgs.dotto.core.DottoApp._
+import com.github.pedrovgs.dotto.interpreter.DottoInterpreter
+import com.github.pedrovgs.dotto.interpreter.actors.ShowMessageActor
 import play.api.Logger
 import play.api.data.Forms._
 import play.api.data._
@@ -19,7 +20,7 @@ import play.api.mvc._
 class DottoController @Inject()(val messagesApi: MessagesApi, val actorSystem: ActorSystem) extends Controller with I18nSupport {
 
   private val messageForm = Form("message" -> nonEmptyText)
-  private val showMessageActor = actorSystem.actorOf(ShowMessageActor.props)
+  private val interpreter = new DottoInterpreter(actorSystem.actorOf(ShowMessageActor.props))
 
   /**
     * Main application endpoint. All the requests to the root domain path will arrive here.
@@ -44,9 +45,9 @@ class DottoController @Inject()(val messagesApi: MessagesApi, val actorSystem: A
         BadRequest(views.html.index(error = "The message can't be empty ¯\\_(ツ)_/¯"))
       },
       messagePosted => {
-        showMessageActor ! ShowMessage(messagePosted)
-        Logger.debug("Message enqueued to be translated " + request)
-        Created(views.html.index(result = messagePosted))
+        val program = enqueueMessageProgram(messagePosted)
+        val resultMessage = program.foldMap(interpreter)
+        Created(views.html.index(result = resultMessage))
       }
     )
   }

@@ -1,4 +1,4 @@
-package com.github.pedrovgs.dotto.morse
+package com.github.pedrovgs.dotto.core.types
 
 sealed trait MorseSymbol {
   val representation: String
