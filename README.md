@@ -1,7 +1,7 @@
 Dotto [![Build Status](https://travis-ci.org/pedrovgs/Dotto.svg?branch=master)](https://travis-ci.org/pedrovgs/Dotto)
 =================================
 
-Dotto is an Open Source morse translator for [RaspberryPi][raspberrypi] developed to practice [Scala][scala]. This is the first proyect I have developed using [Scala][scala] and [Play Framework][playframework].
+Dotto is an Open Source morse translator for [RaspberryPi][raspberrypi] developed to practice [Scala][scala]. This is the first project I have developed using [Scala][scala] and [Play Framework][playframework]. During a second iteration I decided to add [Cats](https://github.com/typelevel/cats) to play with some pure functional programming but the project is not pure enough. There are some side effects we will extract in the future, the current implementation is more related to how to create an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) and a [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) than written pure functional code.
 
 Once Dotto has been initialized you can access to a little web site where a text filed will be used to translate your messages from plain text into morse pulses. To show the morse translation of your messages Dotto uses a led connected at a [Raspberry Pi][raspberrypi].
 
