@@ -5,7 +5,7 @@ Dotto is an Open Source morse translator for [RaspberryPi][raspberrypi] develope
 
 Once Dotto has been initialized you can access to a little web site where a text filed will be used to translate your messages from plain text into morse pulses. To show the morse translation of your messages Dotto uses a led connected at a [Raspberry Pi][raspberrypi].
 
-#Screencasts
+# Screencasts
 
 Dotto web site:
 
@@ -15,11 +15,11 @@ Dotto RaspberryPi:
 
 ![Screencast2][screencast2]
 
-#Usage
+# Usage
 
 To start using Dotto you will need to first set up your components. Take your [Raspberry Pi][raspberrypi] a [led][led] and a [330 OHM resistance][resistance]. 
 
-#Materials
+# Materials
 
 * Raspberry Pi:
 
@@ -33,7 +33,7 @@ To start using Dotto you will need to first set up your components. Take your [R
 
 ![Resistance][resistance]
 
-#Steps
+# Steps
 
 * Connect the Raspberry Pi with an already installed [Raspbian][raspbian] distribution. Dotto will need a LAN connection, remember to connect your Raspberry Pi to your local network.
 
@@ -77,13 +77,13 @@ $ sudo nohup dotto-1.0/bin/dotto -Dapplication.secret=dotto -Dhttp.port=80 &
 
 ![dottoMobileScreenshot][dottoMobileScreenshot]
 
-#Libraries used
+# Libraries used
 
 * [Play Framework][playframework]
 * [PI4J][pi4j]
 * [Scala Test][scalatest]
 
-#Why?
+# Why?
 
 ¯\(ツ)/¯ I want to learn Scala and I had Raspberry Pi I wasn't using :)
 
